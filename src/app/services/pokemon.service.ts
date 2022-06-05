@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { PokemonInterface } from '../pokemon/pokemon.interface.component';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,11 @@ export class PokemonService {
 
   constructor(private http: HttpClient) { }
 
-  obtenerPokemon(nombre: string){
+  obtenerPokemones() {
+    return this.http.get<PokemonInterface[]>(`${this.url}`);
+  }
+
+  obtenerImagen(nombre:string) {
     return this.http.get(`${this.url}${nombre}`);
   }
 }

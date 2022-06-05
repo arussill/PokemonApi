@@ -1,5 +1,20 @@
-<label for="">Nombre</label>:
+<!-- <label for="">Nombre</label>:
 <input type="text" name="nombre" [(ngModel)]="nombre">
 <button (click)="buscar()">Buscar</button>
 <br>
-<img src="{{urlImagen}}" alt="pokemon">
+<img ngIf src="{{urlImagen}}" alt="pokemon">
+<br>
+{{nombre}} -->
+
+<div *ngFor="let pokemon of pokemones" class="row justify-content-center mt-2">
+  <div class="col-auto puntero">
+      <div class="card mt-2">
+          <img [src]="pokemon.image" class="img-fluid" alt="{{pokemon.name}}">
+          <div class="card-body">
+              <h5 class="card-title">{{pokemon.name}}</h5>
+              <p class="card-text"></p>
+          </div>
+      </div>
+  </div>
+</div>
+<br>
