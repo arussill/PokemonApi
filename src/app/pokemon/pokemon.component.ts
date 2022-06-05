@@ -10,7 +10,6 @@ import { PokemonInterface } from './pokemon.interface.component';
 })
 export class PokemonComponent implements OnInit {
   nombre: string = '';
-  urlImagen: string = '';
   pokemones: PokemonInterface[] = [];
 
   constructor(private pokemonService: PokemonService) {}
@@ -19,13 +18,14 @@ export class PokemonComponent implements OnInit {
     this.listaPokemones();
   }
 
-  private listaImagen(nombre: string, url: string): void {
+  private listaImagen(nombre: string): void {
     this.pokemonService.obtenerImagen(nombre).subscribe((data: any) => {
       // let image = {"front_default":data.sprites.front_default};
-      this.pokemones.map((pokemon:any) => {
-        pokemon.image=data.sprites.front_default;
-        return pokemon;
-      });
+      // this.pokemones.map((pokemon:any) => {
+      //   pokemon.image=data.sprites.front_default;
+      //   return pokemon;
+      // });
+
       // this.pokemones.map((pokemon) => {
       //   this.pokemones = [
       //     ...this.pokemones,
@@ -33,6 +33,19 @@ export class PokemonComponent implements OnInit {
       //   ];
       //   // this.urlImagen = data.sprites.front_default;
       // });
+
+      this.pokemones.filter((pokemon: any) => {
+        if (pokemon.name === nombre) {
+          pokemon.image = data.sprites.front_default;
+          pokemon.abilities = data.abilities.map((habilidad: any) => {
+            return habilidad.ability.name;
+          });
+        }
+
+        // pokemon.name===nombre? pokemon.image = data.sprites.front_default : pokemon;
+        // pokemon.image=data.sprites.front_default;
+        return pokemon;
+      });
     });
   }
 
@@ -40,7 +53,7 @@ export class PokemonComponent implements OnInit {
     this.pokemonService.obtenerPokemones().subscribe((data: any) => {
       this.pokemones.push(
         ...data.results.map((pokemon: any) => {
-          this.listaImagen(pokemon.name, pokemon.url);
+          this.listaImagen(pokemon.name);
           // pokemon.url = this.urlImagen;    // console.log(pokemon)
           return pokemon;
         })
