@@ -20,20 +20,6 @@ export class PokemonComponent implements OnInit {
 
   private listaImagen(nombre: string): void {
     this.pokemonService.obtenerImagen(nombre).subscribe((data: any) => {
-      // let image = {"front_default":data.sprites.front_default};
-      // this.pokemones.map((pokemon:any) => {
-      //   pokemon.image=data.sprites.front_default;
-      //   return pokemon;
-      // });
-
-      // this.pokemones.map((pokemon) => {
-      //   this.pokemones = [
-      //     ...this.pokemones,
-      //     { name: pokemon.name, url: pokemon.url.replace(pokemon.url  ,data.sprites.front_default) },
-      //   ];
-      //   // this.urlImagen = data.sprites.front_default;
-      // });
-
       this.pokemones.filter((pokemon: any) => {
         if (pokemon.name === nombre) {
           pokemon.image = data.sprites.front_default;
@@ -41,9 +27,6 @@ export class PokemonComponent implements OnInit {
             return habilidad.ability.name;
           });
         }
-
-        // pokemon.name===nombre? pokemon.image = data.sprites.front_default : pokemon;
-        // pokemon.image=data.sprites.front_default;
         return pokemon;
       });
     });
@@ -54,11 +37,9 @@ export class PokemonComponent implements OnInit {
       this.pokemones.push(
         ...data.results.map((pokemon: any) => {
           this.listaImagen(pokemon.name);
-          // pokemon.url = this.urlImagen;    // console.log(pokemon)
           return pokemon;
         })
       );
-      console.log(this.pokemones);
     });
   }
 }
