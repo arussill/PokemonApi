@@ -1,0 +1,16 @@
+.card {
+  background-color: rgba(39, 64, 112, 0.995);
+  opacity: 0.8;
+  border: 2px soli;
+  color: white;
+  width: 200px;
+  padding: auto 100px;
+}
+.card:hover {
+  box-shadow: 0 0 50px rgba(27, 154, 145, 0.655);
+}
+
+.img {
+  width: 200px;
+  height: 200px;
+}
